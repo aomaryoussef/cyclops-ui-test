@@ -6,7 +6,7 @@ namespace: default
 #--------------> Deployment <--------------#
 replicaCount: 1
 image:
-  repository: 637423467547.dkr.ecr.eu-west-1.amazonaws.com/cards-ecr
+  repository: 637423467546.dkr.ecr.eu-west-1.amazonaws.com/cards-ecr
   pullPolicy: Always
   tag: "latest"
 
@@ -39,7 +39,7 @@ service:
 ingress:
   enabled: true
   annotations:
-    alb.ingress.kubernetes.io/group.name: mylo-test-new
+    alb.ingress.kubernetes.io/group.name: cards-test-new
     alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
     alb.ingress.kubernetes.io/scheme: internal
@@ -47,11 +47,11 @@ ingress:
     alb.ingress.kubernetes.io/subnets: subnet-0a7e96521b68c0173 , subnet-091d23091e28b327f, subnet-0f206969861d74762
     alb.ingress.kubernetes.io/target-type: instance
   hosts:
-    - host: cards.test-mylo.myloapp.com
+    - host: cards.test-cards.test.com
       paths:
         - path: /
           pathType: Prefix
-    - host: cards-mylo-test.myloapp.com
+    - host: cards-mylo-cards.test.com
       paths:
         - path: /
           pathType: Prefix
