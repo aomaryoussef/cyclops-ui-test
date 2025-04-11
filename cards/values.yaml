@@ -1,0 +1,57 @@
+---
+#--------------> General <--------------#
+fullnameOverride: "cards"
+namespace: default
+
+#--------------> Deployment <--------------#
+replicaCount: 1
+image:
+  repository: 637423467547.dkr.ecr.eu-west-1.amazonaws.com/cards-ecr
+  pullPolicy: Always
+  tag: "latest"
+
+environmentVariables:
+  additionalSecretsRef: []
+
+  additionalConfigMapRef: []
+
+podAnnotations:
+  reloader.stakater.com/auto: "true"
+
+#--------------> ExternalSecret <--------------#
+externalSecret:
+  enabled: true
+  name: mylo-cards-test-secrets
+  additionalExternalSecretsRef: []
+  refreshInterval: "1m"
+  secretStore:
+    name: cluster-secret-store
+    kind: ClusterSecretStore
+
+#--------------> Service <--------------#
+service:
+  type: NodePort
+  port: 3000
+  ports:
+    - port: 3000
+
+#--------------> Ingress <--------------#
+ingress:
+  enabled: true
+  annotations:
+    alb.ingress.kubernetes.io/group.name: mylo-test-new
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/security-groups: sg-0f1b3362c951606b5 , sg-0141f99baa3216025
+    alb.ingress.kubernetes.io/subnets: subnet-0a7e96521b68c0173 , subnet-091d23091e28b327f, subnet-0f206969861d74762
+    alb.ingress.kubernetes.io/target-type: instance
+  hosts:
+    - host: cards.test-mylo.myloapp.com
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: cards-mylo-test.myloapp.com
+      paths:
+        - path: /
+          pathType: Prefix

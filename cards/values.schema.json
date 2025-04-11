@@ -1,0 +1,414 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "environmentVariables": {
+      "additionalProperties": false,
+      "properties": {
+        "additionalConfigMapRef": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "additionalConfigMapRef",
+          "type": "array"
+        },
+        "additionalSecretsRef": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "additionalSecretsRef",
+          "type": "array"
+        }
+      },
+      "required": [
+        "additionalSecretsRef",
+        "additionalConfigMapRef"
+      ],
+      "title": "environmentVariables",
+      "type": "object"
+    },
+    "externalSecret": {
+      "additionalProperties": false,
+      "description": "------------\u003e ExternalSecret \u003c--------------#",
+      "properties": {
+        "additionalExternalSecretsRef": {
+          "items": {
+            "required": []
+          },
+          "required": [],
+          "title": "additionalExternalSecretsRef",
+          "type": "array"
+        },
+        "enabled": {
+          "default": true,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "name": {
+          "default": "mylo-cards-test-secrets",
+          "required": [],
+          "title": "name",
+          "type": "string"
+        },
+        "refreshInterval": {
+          "default": "1m",
+          "required": [],
+          "title": "refreshInterval",
+          "type": "string"
+        },
+        "secretStore": {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "default": "ClusterSecretStore",
+              "required": [],
+              "title": "kind",
+              "type": "string"
+            },
+            "name": {
+              "default": "cluster-secret-store",
+              "required": [],
+              "title": "name",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "kind"
+          ],
+          "title": "secretStore",
+          "type": "object"
+        }
+      },
+      "required": [
+        "enabled",
+        "name",
+        "additionalExternalSecretsRef",
+        "refreshInterval",
+        "secretStore"
+      ],
+      "title": "externalSecret",
+      "type": "object"
+    },
+    "fullnameOverride": {
+      "default": "cards",
+      "description": "------------\u003e General \u003c--------------#",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "additionalProperties": false,
+      "properties": {
+        "pullPolicy": {
+          "default": "Always",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "637423467547.dkr.ecr.eu-west-1.amazonaws.com/cards-ecr",
+          "required": [],
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "latest",
+          "required": [],
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "pullPolicy",
+        "tag"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "ingress": {
+      "additionalProperties": false,
+      "description": "------------\u003e Ingress \u003c--------------#",
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "properties": {
+            "alb.ingress.kubernetes.io/group.name": {
+              "default": "mylo-test-new",
+              "required": [],
+              "title": "alb.ingress.kubernetes.io/group.name",
+              "type": "string"
+            },
+            "alb.ingress.kubernetes.io/healthcheck-protocol": {
+              "default": "HTTP",
+              "required": [],
+              "title": "alb.ingress.kubernetes.io/healthcheck-protocol",
+              "type": "string"
+            },
+            "alb.ingress.kubernetes.io/listen-ports": {
+              "default": "[{\"HTTP\":80}]",
+              "required": [],
+              "title": "alb.ingress.kubernetes.io/listen-ports",
+              "type": "string"
+            },
+            "alb.ingress.kubernetes.io/scheme": {
+              "default": "internal",
+              "required": [],
+              "title": "alb.ingress.kubernetes.io/scheme",
+              "type": "string"
+            },
+            "alb.ingress.kubernetes.io/security-groups": {
+              "default": "sg-0f1b3362c951606b5 , sg-0141f99baa3216025",
+              "required": [],
+              "title": "alb.ingress.kubernetes.io/security-groups",
+              "type": "string"
+            },
+            "alb.ingress.kubernetes.io/subnets": {
+              "default": "subnet-0a7e96521b68c0173 , subnet-091d23091e28b327f, subnet-0f206969861d74762",
+              "required": [],
+              "title": "alb.ingress.kubernetes.io/subnets",
+              "type": "string"
+            },
+            "alb.ingress.kubernetes.io/target-type": {
+              "default": "instance",
+              "required": [],
+              "title": "alb.ingress.kubernetes.io/target-type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "alb.ingress.kubernetes.io/group.name",
+            "alb.ingress.kubernetes.io/healthcheck-protocol",
+            "alb.ingress.kubernetes.io/listen-ports",
+            "alb.ingress.kubernetes.io/scheme",
+            "alb.ingress.kubernetes.io/security-groups",
+            "alb.ingress.kubernetes.io/subnets",
+            "alb.ingress.kubernetes.io/target-type"
+          ],
+          "title": "annotations",
+          "type": "object"
+        },
+        "enabled": {
+          "default": true,
+          "required": [],
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "hosts": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "host": {
+                    "default": "cards.test-mylo.myloapp.com",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "Prefix",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "host": {
+                    "default": "cards-mylo-test.myloapp.com",
+                    "required": [],
+                    "title": "host",
+                    "type": "string"
+                  },
+                  "paths": {
+                    "items": {
+                      "anyOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "path": {
+                              "default": "/",
+                              "required": [],
+                              "title": "path",
+                              "type": "string"
+                            },
+                            "pathType": {
+                              "default": "Prefix",
+                              "required": [],
+                              "title": "pathType",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "path",
+                            "pathType"
+                          ],
+                          "type": "object"
+                        }
+                      ],
+                      "required": []
+                    },
+                    "required": [],
+                    "title": "paths",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "host",
+                  "paths"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "hosts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "enabled",
+        "annotations",
+        "hosts"
+      ],
+      "title": "ingress",
+      "type": "object"
+    },
+    "namespace": {
+      "default": "default",
+      "required": [],
+      "title": "namespace",
+      "type": "string"
+    },
+    "podAnnotations": {
+      "additionalProperties": false,
+      "properties": {
+        "reloader.stakater.com/auto": {
+          "default": "true",
+          "required": [],
+          "title": "reloader.stakater.com/auto",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reloader.stakater.com/auto"
+      ],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "replicaCount": {
+      "default": 1,
+      "description": "------------\u003e Deployment \u003c--------------#",
+      "required": [],
+      "title": "replicaCount",
+      "type": "integer"
+    },
+    "service": {
+      "additionalProperties": false,
+      "description": "------------\u003e Service \u003c--------------#",
+      "properties": {
+        "port": {
+          "default": 3000,
+          "required": [],
+          "title": "port",
+          "type": "integer"
+        },
+        "ports": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "port": {
+                    "default": 3000,
+                    "required": [],
+                    "title": "port",
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "port"
+                ],
+                "type": "object"
+              }
+            ],
+            "required": []
+          },
+          "required": [],
+          "title": "ports",
+          "type": "array"
+        },
+        "type": {
+          "default": "NodePort",
+          "required": [],
+          "title": "type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "port",
+        "ports"
+      ],
+      "title": "service",
+      "type": "object"
+    }
+  },
+  "required": [
+    "fullnameOverride",
+    "namespace",
+    "replicaCount",
+    "image",
+    "environmentVariables",
+    "podAnnotations",
+    "externalSecret",
+    "service",
+    "ingress"
+  ],
+  "type": "object"
+}
